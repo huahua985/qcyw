@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qcyw.xchqcyws.mapper.OrderMapper">
+    <resultMap type="orders" id="OrderResult">
+        <result property="id" column="id"/>
+        <result property="goodsId" column="goods_id"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="userId" column="user_id"/>
+        <result property="goodsNum" column="goods_num"/>
+        <result property="goodsPrice" column="goods_price"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="goodsPic" column="goods_pic"/>
+        <result property="sortId" column="sort_id"/>
+        <result property="goodsSpecs" column="goods_specs"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="getOrderList" parameterType="orders" resultMap="OrderResult">
+        select  id, goods_id ,goods_name, user_id, goods_num,goods_price,order_status,
+        goods_pic, sort_id,goods_specs,del_flag,create_by,create_time,update_time
+        from orders
+        <where>
+        <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
+        <if test="delFlag != null  and delFlag != ''">and del_flag = '1'</if>
+        </where>
+    </select>
+
+    <!--user_id和create_by等用户登录搞好在加-->
+    <insert id="insertOrder" parameterType="orders">
+        insert into orders
+        (
+        <if test="id != null and id != ''">id,</if>
+        <if test="userId != null and userId != ''">user_id,</if>
+        <if test="goodsId != null and goodsId != ''">goods_id,</if>
+        <if test="goodsName != null and goodsName != ''">goods_name,</if>
+        <if test="goodsPrice != null and goodsPrice != ''">goods_price,</if>
+        <if test="goodsNum != null and goodsNum != ''">goods_num,</if>
+        <if test="orderStatus != null and orderStatus != ''">order_status,</if>
+        <if test="goodsPic != null and goodsPic != ''">goods_pic,</if>
+        <if test="sortId != null and sortId != ''">sort_id,</if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">goods_specs,</if>
+        create_time,
+        update_time,
+        <if test="delFlag != null and delFlag != ''">del_flag</if>
+        )
+        values
+        (
+        <if test="id != null and id != ''">#{id},</if>
+        <if test="userId != null and userId != ''">#{userId},</if>
+        <if test="goodsId != null and goodsId != ''">#{goodsId},</if>
+        <if test="goodsName != null and goodsName != ''">#{goodsName},</if>
+        <if test="goodsPrice != null and goodsPrice != ''">#{goodsPrice},</if>
+        <if test="goodsNum != null and goodsNum != ''">#{goodsNum},</if>
+        <if test="orderStatus != null and orderStatus != ''">#{orderStatus},</if>
+        <if test="goodsPic != null and goodsPic != ''">#{goodsPic},</if>
+        <if test="sortId != null and sortId != ''">#{sortId},</if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">#{goodsSpecs},</if>
+        sysdate(),
+        sysdate(),
+        <if test="delFlag != null and delFlag != ''">#{delFlag}</if>
+        )
+    </insert>
+
+</mapper>
