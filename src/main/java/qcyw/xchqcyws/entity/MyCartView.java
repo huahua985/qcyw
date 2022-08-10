@@ -4,39 +4,60 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author LUW
  */
 @Data
 @ApiModel("购物车实体类")
-public class MyCart {
-    @ApiModelProperty("id")
-    /**购物车ID*/
-    private int id;
+public class MyCartView {
+    /**my_cart表*/
 
-    @ApiModelProperty("openid")
-    /**openid*/
-    private String openid;
 
-    @ApiModelProperty("goodsId")
-    /**商品标识ID*/
-    private String goodsId;
-
-    @ApiModelProperty("cartNum")
+    @ApiModelProperty("mmCartNum")
     /**购买商品数量*/
-    private int cartNum;
+    private int mmCartNum;
 
-    @ApiModelProperty("addNum")
-    /**购买增加商品数量*/
-    private String addNum;
+    @ApiModelProperty("ssGoodsPic")
+    /**商品图片地址*/
+    private String ssGoodsPic;
 
-    @ApiModelProperty("deleteNum")
-    /**购买减少商品数量*/
-    private String deleteNum;
+    @ApiModelProperty("ssGoodsName")
+    /**商品名称*/
+    private String ssGoodsName;
 
-    @ApiModelProperty("delFlag")
-    /**删除标记(1代表存在 0代表删除)*/
-    private String delFlag;
+    @ApiModelProperty("ssGoodsPrice")
+    /**商品价格*/
+    private double ssGoodsPrice;
+
+    @ApiModelProperty("ssGoodsDetails")
+    /**商品详情*/
+    private String ssGoodsDetails;
+
+    @ApiModelProperty("ssGoodsSpecs")
+    /**商品规格*/
+    private String ssGoodsSpecs;
+
+    /**company表*/
+    @ApiModelProperty("ccCompanyName")
+    /**单位名称*/
+    private String ccCompanyName;
+
+    /**goods_model表*/
+
+    @ApiModelProperty("gmModelName")
+    /**商品型号名称*/
+    private String gmModelName;
+
+    @ApiModelProperty("gmModelPrice")
+    /**商品型号价格*/
+    private String gmModelPrice;
+
+    @ApiModelProperty("gmMemberPrice")
+    /**会员价格*/
+    private double gmMemberPrice;
+
+    @ApiModelProperty("aaAnnexName")
+    /**附件图片*/
+    private String aaAnnexName;
+
 }

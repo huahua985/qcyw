@@ -3,9 +3,9 @@ package qcyw.xchqcyws.common.untils;
 import java.util.UUID;
 
 /**
- * @author wu
+ * @author LUW
  * @version 1.0
- * @date 2020/11/24/024
+ * @date 2922-07-27
  */
 public class UUIDGenerator {
 
@@ -19,9 +19,6 @@ public class UUIDGenerator {
      * @return String UUID
      */
     public static String getUUID() {
-        //去掉"-"
-        //return  UUID.randomUUID().toString().replaceAll("-","");
-
         //不去掉"-"
         return  UUID.randomUUID().toString();
     }

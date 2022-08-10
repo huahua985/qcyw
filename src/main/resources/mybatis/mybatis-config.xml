@@ -3,6 +3,9 @@
 <configuration>
     <!--基本的东西都不用配置，因为springboot配好了-->
     <!--定义别名-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
     <typeAliases>
         <package name="qcyw.xchqcyws.entity"/>
     </typeAliases>

@@ -1,5 +1,7 @@
 package qcyw.xchqcyws.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import qcyw.xchqcyws.common.controller.BaseController;
 import qcyw.xchqcyws.common.domain.AjaxResult;
-import qcyw.xchqcyws.entity.Goods;
+import qcyw.xchqcyws.common.untils.StringUtils;
+import qcyw.xchqcyws.entity.GoodsView;
 import qcyw.xchqcyws.service.GoodsService;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.List;
 /**
  * 棋茶一味商品 -控制层
  *
+ * @author LUW
  * @date 2022/7/27
  * @Description
  */
@@ -34,30 +38,54 @@ public class GoodsController extends BaseController {
      */
     @ApiOperation(value = "获取商品列表信息")
     @GetMapping("/list")
-    public AjaxResult list(String goodsName) {
+    public AjaxResult list(String ssGoodsName,String gsSortId) {
         try {
-            List<Goods> goodsList = goodsService.getGoodsList(goodsName);
-            return AjaxResult.success("OK",goodsList);
+            List<GoodsView> goodsList = goodsService.getGoodsList(ssGoodsName,gsSortId);
+            return AjaxResult.success("OK",  goodsList);
         } catch (Exception e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
         return AjaxResult.error("获取商品列表信息错误");
     }
 
+
     /**
      * 获取商品详情信息
      *
-     * @param goodsId
+     * @param gmGoodsId
      * @return
      */
     @ApiOperation(value = "获取商品详情信息")
     @GetMapping("/getGoodsId")
-    public AjaxResult getGoodsId(String goodsId) {
+    public AjaxResult getGoodsId(String gmGoodsId) {
         try {
-            return AjaxResult.success("OK",goodsService.getGoodsId(goodsId));
+            if(StringUtils.isEmpty(gmGoodsId)){
+                return AjaxResult.error("请传商品ID参数");
+            }else {
+                return AjaxResult.success("OK", goodsService.getGoodsId(gmGoodsId));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return AjaxResult.error("获取商品详情信息错误");
     }
+
+
+    /**
+     * 获取商品首页列表信息
+     *
+     * @return
+     */
+    @ApiOperation(value = "获取商品首页列表信息")
+    @GetMapping("/listPage")
+    public AjaxResult listPage(String ssGoodsName) {
+        try {
+            List<GoodsView> goodsList = goodsService.getGoodsListPage(ssGoodsName);
+            return AjaxResult.success("OK",goodsList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return AjaxResult.error("获取商品首页列表信息错误");
+    }
+
 }

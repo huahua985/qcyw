@@ -5,15 +5,7 @@
 <mapper namespace="qcyw.xchqcyws.mapper.OrderMapper">
     <resultMap type="orders" id="OrderResult">
         <result property="id" column="id"/>
-        <result property="goodsId" column="goods_id"/>
-        <result property="goodsName" column="goods_name"/>
-        <result property="userId" column="user_id"/>
-        <result property="goodsNum" column="goods_num"/>
-        <result property="goodsPrice" column="goods_price"/>
         <result property="orderStatus" column="order_status"/>
-        <result property="goodsPic" column="goods_pic"/>
-        <result property="sortId" column="sort_id"/>
-        <result property="goodsSpecs" column="goods_specs"/>
         <result property="delFlag" column="del_flag"/>
         <result property="createBy" column="create_by"/>
         <result property="createTime" column="create_time"/>
@@ -21,29 +13,32 @@
     </resultMap>
 
     <select id="getOrderList" parameterType="orders" resultMap="OrderResult">
-        select  id, goods_id ,goods_name, user_id, goods_num,goods_price,order_status,
-        goods_pic, sort_id,goods_specs,del_flag,create_by,create_time,update_time
-        from orders
+        select
+        oo_order_status,
+        oo_paid_price,
+        oo_payable_price,
+        os_goods_num,
+        os_goods_pic,
+        os_goods_price,
+        os_goods_specs,
+        os_orders_name,
+        os_orders_son_name
+        from orders_view
         <where>
-        <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
-        <if test="delFlag != null  and delFlag != ''">and del_flag = '1'</if>
+        <if test="openid != null  and openid != ''">and openid = #{oo_openid}</if>
+        and oo_del_flag = '1'
         </where>
     </select>
 
-    <!--user_id和create_by等用户登录搞好在加-->
     <insert id="insertOrder" parameterType="orders">
         insert into orders
         (
         <if test="id != null and id != ''">id,</if>
-        <if test="userId != null and userId != ''">user_id,</if>
-        <if test="goodsId != null and goodsId != ''">goods_id,</if>
-        <if test="goodsName != null and goodsName != ''">goods_name,</if>
-        <if test="goodsPrice != null and goodsPrice != ''">goods_price,</if>
-        <if test="goodsNum != null and goodsNum != ''">goods_num,</if>
+        <if test="ordersId != null and ordersId != ''">orders_id,</if>
+        <if test="openid != null and openid != ''">openid,</if>
         <if test="orderStatus != null and orderStatus != ''">order_status,</if>
-        <if test="goodsPic != null and goodsPic != ''">goods_pic,</if>
-        <if test="sortId != null and sortId != ''">sort_id,</if>
-        <if test="goodsSpecs != null and goodsSpecs != ''">goods_specs,</if>
+        <if test="payablePrice != null and payablePrice != ''">payable_price,</if>
+        <if test="paidPrice != null and paidPrice != ''">paid_price,</if>
         create_time,
         update_time,
         <if test="delFlag != null and delFlag != ''">del_flag</if>
@@ -51,19 +46,48 @@
         values
         (
         <if test="id != null and id != ''">#{id},</if>
-        <if test="userId != null and userId != ''">#{userId},</if>
-        <if test="goodsId != null and goodsId != ''">#{goodsId},</if>
-        <if test="goodsName != null and goodsName != ''">#{goodsName},</if>
-        <if test="goodsPrice != null and goodsPrice != ''">#{goodsPrice},</if>
-        <if test="goodsNum != null and goodsNum != ''">#{goodsNum},</if>
+        <if test="ordersId != null and ordersId != ''">#{ordersId},</if>
+        <if test="openid != null and openid != ''">#{openid},</if>
         <if test="orderStatus != null and orderStatus != ''">#{orderStatus},</if>
-        <if test="goodsPic != null and goodsPic != ''">#{goodsPic},</if>
-        <if test="sortId != null and sortId != ''">#{sortId},</if>
-        <if test="goodsSpecs != null and goodsSpecs != ''">#{goodsSpecs},</if>
+        <if test="payablePrice != null and payablePrice != ''">#{payablePrice},</if>
+        <if test="paidPrice != null and paidPrice != ''">#{paidPrice},</if>
         sysdate(),
         sysdate(),
         <if test="delFlag != null and delFlag != ''">#{delFlag}</if>
         )
     </insert>
 
+
+    <insert id="insertOrderSort" parameterType="ordersSon">
+        insert into orders_son
+        (
+        <if test="id != null and id != ''">id,</if>
+        <if test="orderSonId != null and orderSonId != ''">order_son_id,</if>
+        <if test="orderSonName != null and orderSonName != ''">order_son_name,</if>
+        <if test="ordersName != null and ordersName != ''">orders_name,</if>
+        <if test="goodsNum != null and goodsNum != ''">goods_num,</if>
+        <if test="goodsPrice != null and goodsPrice != ''">goods_price,</if>
+        <if test="goodsPic != null and goodsPic != ''">goods_pic,</if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">goods_specs,</if>
+        create_time,
+        update_time,
+        <if test="delFlag != null and delFlag != ''">del_flag,</if>
+        <if test="ordersIds != null and ordersIds != ''">orders_ids</if>
+        )
+        values
+        (
+        <if test="id != null and id != ''">#{id},</if>
+        <if test="orderSonId != null and orderSonId != ''">#{orderSonId},</if>
+        <if test="orderSonName != null and orderSonName != ''">#{orderSonName},</if>
+        <if test="ordersName != null and ordersName != ''">#{ordersName},</if>
+        <if test="goodsNum != null and goodsNum != ''">#{goodsNum},</if>
+        <if test="goodsPrice != null and goodsPrice != ''">#{goodsPrice},</if>
+        <if test="goodsPic != null and goodsPic != ''">#{goodsPic},</if>
+        <if test="goodsSpecs != null and goodsSpecs != ''">#{goodsSpecs},</if>
+        sysdate(),
+        sysdate(),
+        <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
+        <if test="ordersIds != null and ordersIds != ''">#{ordersIds}</if>
+        )
+    </insert>
 </mapper>

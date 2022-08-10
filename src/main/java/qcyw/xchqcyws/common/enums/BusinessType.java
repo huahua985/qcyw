@@ -3,8 +3,8 @@ package qcyw.xchqcyws.common.enums;
 /**
  * 业务操作类型  枚举
  *
- * @date 2022/7/26
- * @Description
+ * @date 2022/7/27
+ * @author LUW
  */
 public enum BusinessType {
     /**

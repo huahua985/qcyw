@@ -11,44 +11,20 @@ import java.util.Date;
  */
 @Data
 @ApiModel("地址簿实体类")
-public class Address {
-    @ApiModelProperty("id")
-    /**地址簿ID*/
-    private String id;
-
-    @ApiModelProperty("userId")
-    /**用户ID*/
-    private String userId;
-
-    @ApiModelProperty("address")
+public class AddressUserView {
+    @ApiModelProperty("uaAddress")
     /**住址*/
-    private String address;
+    private String uaAddress;
 
-    @ApiModelProperty("phone")
+    @ApiModelProperty("uaPhone")
     /**收货人手机号码*/
-    private String phone;
+    private String uaPhone;
 
-    @ApiModelProperty("consignee")
+    @ApiModelProperty("uaConsignee")
     /**收货人姓名*/
-    private String consignee;
+    private String uaConsignee;
 
-    @ApiModelProperty("isDefault")
+    @ApiModelProperty("uaIsDefault")
     /**是否默认地址(1为默认地址 0则不为默认地址）*/
-    private String isDefault;
-
-    @ApiModelProperty("delFlag")
-    /**删除标记(1代表存在 0代表删除)*/
-    private String delFlag;
-
-    @ApiModelProperty("createBy")
-    /**创建者*/
-    private String createBy;
-
-    @ApiModelProperty("createTime")
-    /**创建时间*/
-    private Date createTime;
-
-    @ApiModelProperty("updateTime")
-    /**更新时间*/
-    private Date updateTime;
+    private int uaIsDefault;
 }

@@ -2,15 +2,18 @@ package qcyw.xchqcyws.common;
 
 import javax.crypto.Cipher;
 import java.security.Key;
-//加解密工具类
+/**
+ * 加解密工具类
+ * @author LUW
+ */
 public class EncryptUtil {
-    // 字符串默认键值
+    /** 字符串默认键值*/
     private static String strDefaultKey = "2022@#$%^&";
 
-    //加密工具
+    /**加密工具*/
     private Cipher encryptCipher = null;
 
-    // 解密工具
+    /** 解密工具*/
     private Cipher decryptCipher = null;
 
     /**

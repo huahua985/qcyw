@@ -8,8 +8,8 @@ import java.io.Serializable;
 /**
  * 分页实体
  *
- * @date 2022/3/31
- * @Description
+ * @date 2022/7/27
+ * @author LUW
  */
 @Data
 public class PageHelperEntity implements Serializable {

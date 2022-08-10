@@ -23,7 +23,10 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-//用于接口发送网址请求
+/**
+ * 用于接口发送网址请求
+ * @author LUW
+ */
 public class HttpClientUtil {
     public static String doGet(String url, Map<String, String> param) {
 

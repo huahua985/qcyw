@@ -9,7 +9,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * @author LUW
+ */
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 
@@ -23,8 +25,10 @@ public class JwtInterceptor implements HandlerInterceptor {
         String token = request.getHeader("Authorization");
 
         try{
-            jwtUtil.verifyToken(token); //校验token
-            return true; //放行请求
+            //校验token
+            jwtUtil.verifyToken(token);
+            //放行请求
+            return true;
         }catch (ExpiredJwtException e){
             e.printStackTrace();
             throw new TokenException("token过期！");

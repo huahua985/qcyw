@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import qcyw.xchqcyws.common.domain.Result;
-
+/**
+ * @author LUW
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    //token失效异常
+    /**token失效异常*/
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = TokenException.class)
     public Result handler(TokenException e){

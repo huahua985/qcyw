@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * @author LUW
+ */
 public class VerifyToken{
         @Autowired
         JwtUtil jwtUtil;

@@ -4,18 +4,21 @@ import net.sf.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-//获取用户信息工具类
+/**
+ *  获取用户信息工具类
+ * @author LUW
+ */
 public class GetUserInfoUtil {
-    // 请求的网址
+    /** 请求的网址*/
     public static final String WX_LOGIN_URL = "https://api.weixin.qq.com/sns/jscode2session";
-    // appid
+    /** appid*/
     public static final String WX_LOGIN_APPID = "wxd39189a8ee4dc39b";
-    // 密匙
+    /** 密匙*/
     public static final String WX_LOGIN_SECRET = "76d9fab95eb4dc698461e89b26fbf940";
-    // 固定参数
+    /** 固定参数*/
     public static final String WX_LOGIN_GRANT_TYPE = "authorization_code";
 
-    //通过code换取微信小程序官网获取的信息
+    /**通过code换取微信小程序官网获取的信息*/
     public static JSONObject getResultJson(String code){
         //配置请求参数
         Map<String,String> params = new HashMap<>();
@@ -31,7 +34,7 @@ public class GetUserInfoUtil {
         return resultJson;
     }
 
-    //获取openid
+    /**获取openid*/
     public static String getOpenid(String code){
         return getResultJson(code).getString("openid");
     }

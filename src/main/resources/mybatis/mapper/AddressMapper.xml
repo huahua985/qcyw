@@ -5,7 +5,7 @@
 <mapper namespace="qcyw.xchqcyws.mapper.AddressMapper">
     <resultMap type="address" id="AddressResult">
         <result property="id" column="id"/>
-        <result property="userId" column="user_id"/>
+        <result property="openid" column="openid"/>
         <result property="phone" column="phone"/>
         <result property="consignee" column="consignee"/>
         <result property="isDefault" column="is_default"/>
@@ -15,13 +15,38 @@
         <result property="updateTime" column="update_time"/>
     </resultMap>
 
-    <select id="getAddressList" parameterType="address" resultMap="AddressResult">
-        select  id, user_id ,phone, consignee, is_default,
-        del_flag, create_by, create_time,update_time
+    <resultMap type="addressUserView" id="AddressUserResult">
+        <result property="uaAddress" column="ua_address"/>
+        <result property="uaPhone" column="ua_phone"/>
+        <result property="uaConsignee" column="ua_consignee"/>
+        <result property="uaIsDefault" column="ua_is_default"/>
+    </resultMap>
+
+    <select id="getAddressList" parameterType="java.lang.String" resultMap="AddressUserResult">
+        select
+        ua_address,
+        ua_phone,
+        ua_consignee,
+        ua_is_default,
+        ua_id
+        from user_address_view
+        <where>
+        <if test="openid != null  and openid != ''">and ua_openid = #{openid}</if>
+        and ua_del_flag = '1'
+        </where>
+    </select>
+
+    <select id="getAddressByIds" parameterType="java.lang.String" resultMap="AddressResult">
+        select
+        phone,
+        address,
+        consignee,
+        is_default,
+        id
         from user_address
         <where>
-        <if test="userId != null  and userId != ''">and user_id = #{userId}</if>
-        <if test="delFlag != null  and delFlag != ''">and del_flag = '1'</if>
+            <if test="openid != null  and openid != ''">and openid = #{openid}</if>
+            and del_flag = '1'
         </where>
     </select>
 
@@ -30,34 +55,40 @@
         insert into user_address
         (
         <if test="id != null and id != ''">id,</if>
-        <if test="userId != null and userId != ''">user_id,</if>
+        <if test="openid != null and openid != ''">openid,</if>
         <if test="address != null and address != ''">address,</if>
         <if test="phone != null and phone != ''">phone,</if>
         <if test="consignee != null and consignee != ''">consignee,</if>
-        <if test="isDefault != null and isDefault != ''">is_default,</if>
+        <if test="isDefault != null">is_default,</if>
         create_time,
         update_time,
         <if test="delFlag != null and delFlag != ''">del_flag</if>
+        <if test="province != null and province != ''">province</if>
+        <if test="city != null and city != ''">city</if>
+        <if test="area != null and area != ''">area</if>
         )
         values
         (
         <if test="id != null and id != ''">#{id},</if>
-        <if test="userId != null and userId != ''">#{userId},</if>
+        <if test="openid != null and openid != ''">#{openid},</if>
         <if test="address != null and address != ''">#{address},</if>
         <if test="phone != null and phone != ''">#{phone},</if>
         <if test="consignee != null and consignee != ''">#{consignee},</if>
-        <if test="isDefault != null and isDefault != ''">#{isDefault},</if>
+        <if test="isDefault != null">#{isDefault},</if>
         sysdate(),
         sysdate(),
         <if test="delFlag != null and delFlag != ''">#{delFlag}</if>
+        <if test="province != null and province != ''">#{province}</if>
+        <if test="city != null and city != ''">#{city}</if>
+        <if test="area != null and area != ''">#{area}</if>
         )
     </insert>
 
     <update id="updateAddress" parameterType="address">
         update user_address
         <set>
-            <if test="userId != null and userId != ''">
-                user_id = #{userId},
+            <if test="openid != null">
+                openid = #{openid},
             </if>
             <if test="address != null and address != ''">
                 address = #{address},
@@ -68,14 +99,27 @@
             <if test="consignee != null and consignee != ''">
                 consignee = #{consignee},
             </if>
-            <if test="isDefault != null and isDefault != ''">
+            <if test="isDefault != null">
                 is_default = #{isDefault},
             </if>
-            update_time = sysdate(),
+                update_time = sysdate(),
             <if test="delFlag != null and delFlag != ''">
                 del_flag = #{delFlag},
             </if>
+            <if test="province != null and province != ''">
+                province = #{province},
+            </if>
+            <if test="city != null and city != ''">
+                city = #{city},
+            </if>
+            <if test="area != null and area != ''">
+                area = #{area},
+            </if>
         </set>
-        where id = #{id}
+        where id = #{id} and openid = #{openid}
     </update>
+
+    <delete id="deleteAddress" parameterType="java.lang.String">
+        delete from user_address where id = #{id} and openid = #{openid}
+    </delete>
 </mapper>

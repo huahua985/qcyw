@@ -5,8 +5,8 @@ import qcyw.xchqcyws.common.untils.StringUtils;
 /**
  * sql操作工具类
  *
- * @date 2022/7/26
- * @Description
+ * @date 2022/7/27
+ * @author LUW
  */
 public class SqlUtil {
     /**

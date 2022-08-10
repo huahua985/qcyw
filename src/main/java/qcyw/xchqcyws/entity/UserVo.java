@@ -6,13 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author LUW
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("用户个人信息Vo类")
 public class UserVo {
 
-    @ApiModelProperty("手机号")
-    private String phone;
+    @ApiModelProperty("余额")
+    private double price;
 
+    @ApiModelProperty("openid")
+    private String openid;
 }

@@ -7,7 +7,7 @@ import qcyw.xchqcyws.common.untils.StringUtils;
  * 分页数据
  *
  * @date 2022/7/27
- * @Description
+ * @author LUW
  */
 public class PageDomain {
     /**

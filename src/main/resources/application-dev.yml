@@ -3,7 +3,7 @@ server:
     # 服务器的HTTP端口，默认为8080
     port: 8080
 #    servlet:
-#        # 应用的访问路径
+##        # 应用的访问路径
 #        context-path: /
     ssl:
         key-store: classpath:weixin.pfx
@@ -38,7 +38,6 @@ mybatis:
     mapperLocations: classpath:mybatis/mapper/*Mapper.xml
     # 加载全局的配置文件
     configLocation: classpath:mybatis/mybatis-config.xml
-
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -76,6 +75,6 @@ spring:
             max-request-size: 80MB #设置单次请求文件的总大小
     mvc:
         static-path-pattern: /**
-
-
-
+# 日志配置
+logging:
+    config: classpath:logback/logback-spring.xml

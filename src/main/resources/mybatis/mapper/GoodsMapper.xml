@@ -3,35 +3,81 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qcyw.xchqcyws.mapper.GoodsMapper">
-    <resultMap type="goods" id="GoodsResult">
-        <result property="id" column="id"/>
-        <result property="goodsId" column="goods_id"/>
-        <result property="goodsName" column="goods_name"/>
-        <result property="sortId" column="sort_id"/>
-        <result property="goodsPic" column="goods_pic"/>
-        <result property="goodsNum" column="goods_num"/>
-        <result property="goodsPrice" column="goods_price"/>
-        <result property="goodsDetails" column="goods_details"/>
-        <result property="goodsSpecs" column="goods_specs"/>
-        <result property="delFlag" column="del_flag"/>
-        <result property="createBy" column="create_by"/>
-        <result property="createTime" column="create_time"/>
-        <result property="updateTime" column="update_time"/>
+    <resultMap type="goodsView" id="GoodsResult">
+        <result property="ssGoodsDetails" column="s_goods_details"/>
+        <result property="ssGoodsName" column="s_goods_name"/>
+        <result property="ssGoodsPic" column="s_goods_pic"/>
+        <result property="ssGoodsPrice" column="s_goods_price"/>
+        <result property="ssGoodsSpecs" column="s_goods_specs"/>
+        <result property="gsSortName" column="gs_sort_name"/>
+        <result property="ssGoodsId" column="s_goods_id"/>
+    </resultMap>
+
+    <resultMap type="goodsModelView" id="GoodsModelResult">
+        <result property="gmModelName" column="gm_model_name"/>
+        <result property="gmModelPrice" column="gm_model_price"/>
+        <result property="gmMemberPrice" column="gm_member_price"/>
+        <result property="ccCompanyName" column="c_company_name"/>
+        <result property="aaAnnexName" column="a_annex_name"/>
+        <result property="ssGoodsSpecs" column="s_goods_specs"/>
+        <result property="ssGoodsPic" column="s_goods_pic"/>
+        <result property="ssGoodsName" column="s_goods_name"/>
+        <result property="ssGoodsPrice" column="s_goods_price"/>
+        <result property="ssGoodsDetails" column="s_goods_details"/>
     </resultMap>
 
     <select id="getGoodsList" parameterType="java.lang.String" resultMap="GoodsResult">
-        select  id, goods_id ,goods_name, sort_id, goods_pic,
-        goods_num, goods_price, goods_details,goods_specs
-        from goods
+        select
+        s_goods_name,
+        s_goods_id,
+        s_goods_price,
+        s_goods_details,
+        s_goods_pic,
+        gs_sort_name,
+        s_goods_specs,
+        s_goods_id
+        from goods_view
         <where>
-        <if test="goodsName != null  and goodsName != ''">and goods_name like concat('%','${goodsName}','%')</if>
-        and del_flag = '1'
+            <if test="ssGoodsName != null  and ssGoodsName != ''">and s_goods_name like concat('%','${ssGoodsName}','%')</if>
+            <if test="gsSortId != null  and gsSortId != ''">and gs_sort_id = #{gsSortId}</if>
+            and s_del_flag = '1'
         </where>
     </select>
 
-    <select id="getGoodsId" parameterType="java.lang.String" resultMap="GoodsResult">
-        select  id, goods_id ,goods_name, sort_id, goods_pic,
-        goods_num, goods_price, goods_details,goods_specs
-        from goods where goods_id = #{goodsId} and del_flag = '1'
+    <select id="getGoodsId" parameterType="java.lang.String" resultMap="GoodsModelResult">
+        select
+        gm_model_name,
+        gm_model_price,
+        gm_member_price,
+        c_company_name,
+        a_annex_name,
+        s_goods_specs,
+        s_goods_pic,
+        s_goods_name,
+        s_goods_price,
+        s_goods_details
+        from goods_model_view
+        <where>
+            <if test="gmGoodsId != null  and gmGoodsId != ''">and gm_goods_id = #{gmGoodsId}</if>
+            and s_del_flag = '1'
+        </where>
+    </select>
+
+    <select id="getGoodsListPage" parameterType="java.lang.String" resultMap="GoodsResult">
+        select
+        s_goods_name,
+        s_goods_id,
+        s_goods_price,
+        s_goods_details,
+        s_goods_pic,
+        gs_sort_name,
+        s_goods_specs,
+        s_goods_id
+        from goods_view
+        <where>
+            <if test="ssGoodsName != null  and ssGoodsName != ''">and s_goods_name like concat('%','${ssGoodsName}','%')</if>
+            and s_del_flag = '1'
+        </where>
+        order by rand() limit 10
     </select>
 </mapper>

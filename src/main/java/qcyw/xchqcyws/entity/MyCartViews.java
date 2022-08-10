@@ -17,6 +17,10 @@ public class MyCartViews {
     /**购买商品数量*/
     private int mmCartNum;
 
+    @ApiModelProperty("mmOpenid")
+    /**my_cart openid*/
+    private String mmOpenid;
+
 
     @ApiModelProperty("ssGoodsPic")
     /**商品图片地址*/

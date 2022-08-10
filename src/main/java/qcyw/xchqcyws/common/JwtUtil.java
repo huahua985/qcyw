@@ -9,7 +9,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-
+/**
+ * @author LUW
+ */
 @Data
 @Component
 @ConfigurationProperties(prefix = "markerhub.jwt")

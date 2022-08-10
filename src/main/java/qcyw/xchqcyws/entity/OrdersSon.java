@@ -11,34 +11,30 @@ import java.util.Date;
  */
 @Data
 @ApiModel("订单实体类")
-public class Orders {
+public class OrdersSon {
     @ApiModelProperty("id")
     /**订单表ID*/
     private String id;
 
-    @ApiModelProperty("ordersId")
-    /**订单商品标识ID*/
-    private String ordersId;
+    @ApiModelProperty("orderSonId")
+    /**订单型号标识*/
+    private String orderSonId;
 
-    @ApiModelProperty("openid")
-    /**用户ID*/
-    private String openid;
+    @ApiModelProperty("orderSonName")
+    /**订单型号名称*/
+    private String orderSonName;
 
-    @ApiModelProperty("ordersName")
-    /**订单商品名称*/
-    private String ordersName;
+    @ApiModelProperty("goods_num")
+    /**订单数量*/
+    private int goodsNum;
 
-    @ApiModelProperty("payablePrice")
-    /**应付金额*/
-    private Double payablePrice;
-
-    @ApiModelProperty("paidPrice")
-    /**实付金额*/
-    private Double paidPrice;
+    @ApiModelProperty("goodsPrice")
+    /**订单价格*/
+    private Double goodsPrice;
 
     @ApiModelProperty("delFlag")
     /**删除标记(1代表存在 0代表删除)*/
-    private String delFlag;
+    private int delFlag;
 
     @ApiModelProperty("createBy")
     /**创建者*/
@@ -52,4 +48,19 @@ public class Orders {
     /**更新时间*/
     private Date updateTime;
 
+    @ApiModelProperty("goodsPic")
+    /**订单图片地址*/
+    private String goodsPic;
+
+    @ApiModelProperty("goodsSpecs")
+    /**订单商品规格*/
+    private String goodsSpecs;
+
+    @ApiModelProperty("ordersIds")
+    /**订单主表关联ID*/
+    private String ordersIds;
+
+    @ApiModelProperty("ordersName")
+    /**订单商品名称*/
+    private String ordersName;
 }

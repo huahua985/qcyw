@@ -6,11 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author LUW
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("用户实体类")
 public class User {
+    @ApiModelProperty("id")
+    private String id;
+
+    @ApiModelProperty("delFlag")
+    private int delFlag;
 
     @ApiModelProperty("openid")
     private String openid;
@@ -27,4 +35,6 @@ public class User {
     @ApiModelProperty("unionid")
     private String unionid;
 
+    @ApiModelProperty("price")
+    private double price;
 }

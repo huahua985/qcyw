@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
- 
+/**
+ * @date 2022/7/27
+ * @author  LUW
+ */
 @Controller
 @RequestMapping("/upload")
 public class UploadController {
@@ -28,7 +31,8 @@ public class UploadController {
        
     	//获取项目classes/static的地址
         String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
-        String fileName = file.getOriginalFilename();  //获取文件名
+        //获取文件名
+        String fileName = file.getOriginalFilename();
         
         // 图片存储目录及图片名称
         String url_path = "images" + File.separator + fileName;
@@ -44,7 +48,8 @@ public class UploadController {
             saveFile.mkdirs();
         }
         try {
-            file.transferTo(saveFile);  //将临时存储的文件移动到真实存储路径下
+            //将临时存储的文件移动到真实存储路径下
+            file.transferTo(saveFile);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,7 +4,7 @@ package qcyw.xchqcyws.common.constants;
  * 常量
  *
  * @date 2022/7/27
- * @Description luwei
+ * @author  LUW
  */
 public class Constants {
 

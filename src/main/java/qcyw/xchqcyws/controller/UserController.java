@@ -14,6 +14,9 @@ import qcyw.xchqcyws.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author LUW
+ */
 @Api(tags = "UserController")
 @RestController
 @RequestMapping("/user/person-info")
@@ -29,7 +32,6 @@ public class UserController {
     @ApiOperation("修改用户个人信息")
     public Result updateOwnerInfo(HttpServletRequest request,
                                   @RequestBody UserVo userVo){
-
         //获取请求头token
         String token = request.getHeader("Authorization");
         //获取openid
